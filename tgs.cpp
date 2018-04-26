@@ -1,7 +1,7 @@
 #include <QtGui>
 #include "tgs.h"
-#define _alto  300
-#define _ancho 700
+#define _alto  100
+#define _ancho 100
 #include <QGraphicsSceneMouseEvent>
 
 TGs::TGs(QObject *parent)
@@ -10,18 +10,18 @@ TGs::TGs(QObject *parent)
     this->over = false;
 
     QGraphicsTextItem * io = new QGraphicsTextItem;
-    int width = this->width();
-    int heigth = this->height();
-    io->setPos(width / 2, heigth / 2);
+    //int width = parent->width();
+    //int heigth = this->height();
+    //io->setPos(width / 2, heigth / 2);
     io->setPlainText("Barev");
-
+/*
     QFont font;
     font.setPixelSize(500);
     font.setBold(false);
     font.setFamily("Calibri");
 
     io->setFont(font);
-
+*/
     this->addItem(io);
 }
 
@@ -39,7 +39,8 @@ void TGs::drawBackground(QPainter *painter, const QRectF &rect)
     pen.setBrush(Qt::lightGray);
     painter->setPen(pen);
 
-    painter->drawText(-225, 10, this->str);
+    painter->drawText(100, 100, this->str);
+    /*
     alto = _alto;  // 50 + 2
 
     for(int i = 0; i < alto; ++i)
@@ -54,7 +55,7 @@ void TGs::drawBackground(QPainter *painter, const QRectF &rect)
         j = i * adjx - 210;
 
         painter->drawLine(QPoint(j, 0), QPoint(j, _ancho * 2));
-    }
+    }*/
 }
 
 void TGs::mouseMoveEvent(QGraphicsSceneMouseEvent *mouseEvent)
