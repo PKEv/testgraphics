@@ -33,6 +33,8 @@ public slots:
     bool over;
     QString str;
     QGraphicsTextItem cursor;
+   // QGraphicsPixmapItem *it1;
+    QGraphicsPixmapItem *it2;
 };
 
 #endif // TGS_H

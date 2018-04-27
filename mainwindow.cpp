@@ -6,14 +6,17 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
 
-    int width = 200;
+    int width = 100;
     int height = 200;
 
     ui->setupUi(this);
     tgs = new TGs(ui->graphicsView);
 
-    tgs->str = "fkjklsdfjksdjf";
+
     ui->graphicsView->setMouseTracking(true);
+    //ui->graphicsView->setAcc
+
+
     ui->graphicsView->setFrameStyle(0);
     ui->graphicsView->setScene(tgs);
     /*
@@ -23,8 +26,10 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->graphicsView->fitInView(0, 0, width, height, Qt::KeepAspectRatio);
 */
-    //ui->graphicsView->setFixedSize(width, height);
+    ui->graphicsView->setFixedSize(width, height);
+
     ui->graphicsView->setSceneRect(0, 0, width, height);
+
     ui->graphicsView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     ui->graphicsView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 }
