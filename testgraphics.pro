@@ -24,13 +24,12 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 
 SOURCES += \
-        main.cpp \
-        mainwindow.cpp \
-    tgs.cpp
+        sample.cc \
+    graphicspixmapitem.cpp \
+    avatarimage.cpp
 
 HEADERS += \
-        mainwindow.h \
-    tgs.h
+        sample.h \
+    graphicspixmapitem.h \
+    avatarimage.h
 
-FORMS += \
-        mainwindow.ui
