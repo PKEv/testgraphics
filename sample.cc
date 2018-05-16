@@ -12,13 +12,12 @@ int main(int argc, char **argv)
   w.setMouseTracking(true);
 
   //QGraphicsScene scene;
-  AvatarImage view1(64,644);
+  AvatarImage view1(64,64);
   //GraphicsView view1;
 
     layout.addWidget(&view1);
 
     view1.show();
-
 
   w.show();
   return app.exec();

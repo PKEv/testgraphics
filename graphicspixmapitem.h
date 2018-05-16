@@ -15,14 +15,18 @@
 #include <QGraphicsOpacityEffect>
 #include <QPropertyAnimation>
 
-class GraphicsPixmapItem : public QGraphicsItem
+class GraphicsPixmapItem : public QObject, public QGraphicsItem
 {
+    Q_OBJECT
+
 public:
   //enum ClickQuadrant { None=0, TopLeft, TopRight, BotLeft, BotRight };
 
   GraphicsPixmapItem(const QPixmap & pixmap, QGraphicsItem * parent = 0);
   void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
   QRectF boundingRect() const override;
+signals:
+  void clicked();
 protected:
   void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
   void mouseMoveEvent(QGraphicsSceneMouseEvent *event) override;

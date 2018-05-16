@@ -11,7 +11,7 @@
 #include <QPointF>
 #include <QSlider>
 #include <QTransform>
-
+/*
 class GraphicsView : public QGraphicsView
 {
 public:
@@ -20,7 +20,7 @@ public:
     QGraphicsScene *scene;
 
 };
-
+*/
 
 
 

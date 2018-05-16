@@ -34,6 +34,7 @@ void GraphicsPixmapItem::paint(QPainter *painter, const QStyleOptionGraphicsItem
 
 void GraphicsPixmapItem::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 {
+    Q_UNUSED(event);
     QGraphicsOpacityEffect *opacity = new QGraphicsOpacityEffect;
     QPropertyAnimation *anim = new QPropertyAnimation( opacity, "opacity" );
     setGraphicsEffect(opacity);
@@ -49,6 +50,7 @@ void GraphicsPixmapItem::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 
 void GraphicsPixmapItem::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
+    Q_UNUSED(event);
     QGraphicsOpacityEffect *opacity = new QGraphicsOpacityEffect;
     QPropertyAnimation *anim = new QPropertyAnimation( opacity, "opacity" );
     setGraphicsEffect(opacity);
@@ -64,7 +66,9 @@ void GraphicsPixmapItem::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 }
 
 void GraphicsPixmapItem::hoverMoveEvent(QGraphicsSceneHoverEvent* event)
-{/*
+{
+    //Q_UNUSED(event);
+    /*
   if (isSelected()) {
     QPointF eventPos = event->pos();
 
@@ -111,7 +115,10 @@ GraphicsPixmapItem::GraphicsPixmapItem(const QPixmap & pixmap, QGraphicsItem * p
 }
 
 void GraphicsPixmapItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
-{/*
+{
+    Q_UNUSED(event);
+    emit clicked();
+    /*
   QPointF eventPos = event->pos();
 
   QRectF rect = boundingRect();
@@ -146,7 +153,9 @@ void GraphicsPixmapItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
 }
 
 void GraphicsPixmapItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
-{/*
+{
+    Q_UNUSED(event);
+    /*
   if (!(m_quad == ClickQuadrant::None)) {
 //    qDebug() << "Release resize action";
     m_quad = ClickQuadrant::None;
@@ -161,6 +170,7 @@ void GraphicsPixmapItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 
 void GraphicsPixmapItem::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 {
+    Q_UNUSED(event);
     /*
   QPointF eventPos = event->pos();
 

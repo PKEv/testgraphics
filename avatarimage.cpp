@@ -5,35 +5,80 @@ AvatarImage::AvatarImage(int h, int w, QWidget * parent) : QGraphicsView(parent)
     m_scene = new QGraphicsScene(0, 0, w, h, this);
     setScene(m_scene);
 
-    int size = 64;
-    resize(size, size);
+    size.setHeight(h);
+    size.setWidth(w);
 
-    setSceneRect(0, 0, size, size); /* x, y, width, height */
+    resize(size);
+
+    setSceneRect(0, 0, size.width(), size.height()); /* x, y, width, height */
     setRenderHint(QPainter::Antialiasing);
     setViewportUpdateMode(QGraphicsView::BoundingRectViewportUpdate);
 
-    QImage image("d:/QtProjects/testgraphics2/Close.png");
-    image = image.scaled(size / 3, size / 3, Qt::KeepAspectRatio, Qt::SmoothTransformation);
-    QImage image2("d:/QtProjects/testgraphics2/Search.png");
-    image2 = image2.scaled(size / 2, size / 2, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+    QImage imageClose("d:/QtProjects/testgraphics/Close.svg");
+    imageClose = imageClose.scaled(
+                size.width() / 2,
+                size.height() / 2,
+                Qt::KeepAspectRatio,
+                Qt::SmoothTransformation);
+    QImage imageOpen("d:/QtProjects/testgraphics/Search.svg");
+    imageOpen = imageOpen.scaled(
+                size.width() / 2,
+                size.height() / 2,
+                Qt::KeepAspectRatio,
+                Qt::SmoothTransformation);
 
-    QImage image3("d:/QtProjects/testgraphics2/myAvatar.png");
-    image3 = image3.scaled(size - 2, size - 2, Qt::KeepAspectRatio, Qt::SmoothTransformation);
-    QPixmap pixmap = getRoundedAvatar(image3);
+    //QPixmap pixmap = setDefaultAvatar();
 
-    item3 = new QGraphicsPixmapItem(pixmap);
-    item = new GraphicsPixmapItem(QPixmap::fromImage(image));
-    item2 = new GraphicsPixmapItem(QPixmap::fromImage(image2));
+    itemAvatar = new QGraphicsPixmapItem();
+    setDefaultAvatar();
+    itemClose = new GraphicsPixmapItem(QPixmap::fromImage(imageClose));
+    itemOpen = new GraphicsPixmapItem(QPixmap::fromImage(imageOpen));
 
-    m_scene->addItem(item3);
-    m_scene->addItem(item);
-    m_scene->addItem(item2);
+    m_scene->addItem(itemAvatar);
+    m_scene->addItem(itemClose);
+    m_scene->addItem(itemOpen);
 
-    item->setPos(size - size/5, 0);
-    item2->setPos(size - size/4, size / 2);
+    itemClose->setPos(
+                size.width() / 2,
+                0);
+    itemOpen->setPos(
+                0,
+                size.height() / 2);
 
-    item->setOpacity(0.2);
-    item2->setOpacity(0.2);
+    itemClose->setOpacity(opacity);
+    itemOpen->setOpacity(opacity);
+
+    connect(itemClose, SIGNAL(clicked()), this, SLOT(mousePressDropButton()) );
+    connect(itemOpen, SIGNAL(clicked()), this, SLOT(mousePressOpenButton()) );
+}
+
+void AvatarImage::setDefaultAvatar()
+{
+    //QImage imgAvatar("d:/QtProjects/testgraphics2/myAvatar.png");
+    QImage imgAvatar("d:/QtProjects/testgraphics/contact_dark.svg");
+    setAvatar(imgAvatar);
+}
+
+void AvatarImage::mousePressOpenButton(void)
+{
+    emit openAvatar();
+}
+
+void AvatarImage::setAvatar(QImage imgAvatar)
+{
+    imgAvatar = imgAvatar.scaled(
+                size.width() - 2,
+                size.height() - 2,
+                Qt::KeepAspectRatio,
+                Qt::SmoothTransformation);
+    QPixmap pixmap = getRoundedAvatar(imgAvatar);
+
+    itemAvatar->setPixmap(pixmap);
+}
+
+void AvatarImage::mousePressDropButton()
+{
+    setDefaultAvatar();
 }
 
 QPixmap AvatarImage::getRoundedAvatar(QImage& img)
